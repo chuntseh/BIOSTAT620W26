@@ -1,0 +1,372 @@
+---
+title: "Assignment 02 - Data Viz and Wrangling"
+format: 
+  html:
+    theme: simplex
+    embed-resources: true
+link-citations: true
+date: 2026-02-13
+---
+
+## Due Date
+
+This assignment is due by 11:59pm Eastern Time, February 27th, 2026, submitted on [Github issues](https://github.com/dmcable/BIOSTAT620W26/issues/5).
+
+For this assignment, we will be analyzing data from USC's Children's Health Study. The learning objectives are to conduct data wrangling and visualize the data with key questions in mind. For each problem, try to show your work by displaing main variable outputs (e.g. `print(head(my_dataframe))`) as you progress.
+
+## Data Wrangling
+
+You will need to download two CHS datasets. The [individual](https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/chs/chs_individual.csv)
+and [regional](https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/chs/chs_regional.csv)
+CHS datasets in `chs`.
+The individual data includes personal and health characteristics of children in
+12 communities across Southern California. The regional data include air quality
+measurements at the community level.  You will need to do the following:
+
+### 1. (20 points)
+Once downloaded, you can merge these datasets using the `location` variable. 
+After merging the data, make sure you don’t have any duplicates by counting
+the number of rows. Make sure it matches.
+   
+In the case of missing values, impute data using the average amongst 
+individuals with the same values for the "male" and "hispanic" variables. 
+For categorical variables, take the mode.
+If you are interested (and feel adventurous)
+in the theme of Data Imputation, take a look at this paper on "Multiple 
+Imputation"
+using the Amelia R package 
+[here](https://gking.harvard.edu/files/gking/files/amelia_jss.pdf).
+```{r}
+library(tidyverse)
+
+# --- 1. Load the Data ---
+url_ind <- "https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/chs/chs_individual.csv"
+url_reg <- "https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/chs/chs_regional.csv"
+
+chs_ind <- read_csv(url_ind)
+chs_reg <- read_csv(url_reg)
+
+# --- 2. Merge the Datasets ---
+# Merge the data
+chs_merged <- merge(chs_ind, chs_reg, by = "townname", all.x = TRUE)
+
+# --- 3. Check for Duplicates ---
+nrow(chs_merged)
+head(chs_merged)
+
+# --- 4. Impute Missing Values ---
+get_mode <- function(v) {
+  uniqv <- unique(na.omit(v))
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+chs_imputed <- chs_merged %>%
+  group_by(male, hispanic) %>%
+  mutate(
+    # For numeric columns: replace NA with the mean of the group
+    across(where(is.numeric), ~ ifelse(is.na(.), mean(., na.rm = TRUE), .)),
+    
+    # For categorical (character/factor) columns: replace NA with the mode of the group
+    across(where(is.character), ~ ifelse(is.na(.), get_mode(.), .))
+  ) %>%
+  ungroup()
+
+# Check if there are any NAs left
+total_na <- sum(is.na(chs_imputed))
+
+# Display the final imputed dataframe
+print(head(chs_imputed))
+```
+
+   
+### 2. (10 points)
+Create a new categorical variable named “obesity_level” using the BMI measurement
+(underweight BMI<14; normal BMI 14-22; overweight BMI 22-24; obese BMI>24).
+To make sure the variable is rightly coded, create a summary table that contains
+the minimum BMI, maximum BMI, and the total number of observations per category.
+```{r}
+# --- 1. Create the 'obesity_level' variable ---
+chs_imputed <- chs_imputed %>%
+  mutate(obesity_level = case_when(
+    bmi < 14 ~ "Underweight",
+    bmi >= 14 & bmi <= 22 ~ "Normal",
+    bmi > 22 & bmi <= 24 ~ "Overweight",
+    bmi > 24 ~ "Obese"
+  ))
+
+chs_imputed$obesity_level <- factor(chs_imputed$obesity_level, 
+                                    levels = c("Underweight", "Normal", "Overweight", "Obese"))
+
+# --- 2. Create the Summary Table ---
+summary_table <- chs_imputed %>%
+  group_by(obesity_level) %>%
+  summarise(
+    Min_BMI = min(bmi, na.rm = TRUE),
+    Max_BMI = max(bmi, na.rm = TRUE),
+    Total_Observations = n()
+  )
+
+print(summary_table)
+
+```
+
+### 3. (10 points)
+Create another categorical variable named "smoke_gas_exposure" that summarizes
+"Second Hand Smoke" and "Gas Stove." The variable should have four categories
+in total.
+```{r}
+# --- 1. Create the 'smoke_gas_exposure' variable ---
+chs_imputed <- chs_imputed %>%
+  mutate(smoke_gas_exposure = case_when(
+    smoke == 0 & gasstove == 0 ~ "None",
+    smoke == 1 & gasstove == 0 ~ "Smoke Only",
+    smoke == 0 & gasstove == 1 ~ "Gas Stove Only",
+    smoke == 1 & gasstove == 1 ~ "Both"
+  ))
+
+# --- 2. Verify the new variable ---
+table(chs_imputed$smoke_gas_exposure)
+```
+
+
+### 4. (10 points)
+Create four summary tables showing the average (or proportion, if binary) and
+sd of “Forced expiratory volume in 1 second (ml)” (an asthma indicator) by
+town, sex, obesity level, and "smoke_gas_exposure." Comment on your findings.
+```{r}
+# 4a. Summary by Town
+summary_town <- chs_imputed %>%
+  group_by(townname) %>%
+  summarise(
+    Mean_FEV = mean(fev, na.rm = TRUE),
+    SD_FEV = sd(fev, na.rm = TRUE),
+    Count = n()
+  )
+print(summary_town)
+
+# 4b. Summary by Sex
+summary_sex <- chs_imputed %>%
+  mutate(sex_label = ifelse(male == 1, "Male", "Female")) %>%
+  group_by(sex_label) %>%
+  summarise(
+    Mean_FEV = mean(fev, na.rm = TRUE),
+    SD_FEV = sd(fev, na.rm = TRUE),
+    Count = n()
+  )
+print(summary_sex)
+
+# 4c. Summary by Obesity Level
+summary_obesity <- chs_imputed %>%
+  group_by(obesity_level) %>%
+  summarise(
+    Mean_FEV = mean(fev, na.rm = TRUE),
+    SD_FEV = sd(fev, na.rm = TRUE),
+    Count = n()
+  )
+print(summary_obesity)
+
+# 4d. Summary by Smoke/Gas Exposure
+summary_smoke <- chs_imputed %>%
+  group_by(smoke_gas_exposure) %>%
+  summarise(
+    Mean_FEV = mean(fev, na.rm = TRUE),
+    SD_FEV = sd(fev, na.rm = TRUE),
+    Count = n()
+  )
+print(summary_smoke)
+```
+
+
+## Looking at the Data (EDA) (20 points)
+
+The primary questions of interest are:
+1. What is the association between BMI and FEV (forced expiratory volume)?
+2. What is the association between smoke and gas exposure and FEV?
+3. What is the association between PM2.5 exposure and FEV?
+
+Follow the EDA checklist from week 3 and the previous assignment. Be sure to focus on the key variables.
+```{r}
+# --- EDA Step 1: Check Dimensions & Variables ---
+dim(chs_imputed)
+str(chs_imputed)
+
+summary(chs_imputed$fev)
+
+# Histogram of FEV to see if it is normally distributed
+ggplot(chs_imputed, aes(x = fev)) +
+  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
+  theme_minimal() +
+  labs(title = "Distribution of FEV", x = "FEV (ml)", y = "Count")
+
+# --- EDA Step 2: Key Question 1 (BMI vs. FEV) ---
+# Question: What is the association between BMI and FEV?
+ggplot(chs_imputed, aes(x = bmi, y = fev)) +
+  geom_point(alpha = 0.5, color = "darkblue") +
+  geom_smooth(method = "lm", color = "red") + 
+  theme_minimal() +
+  labs(title = "Association between BMI and FEV",
+       x = "BMI", y = "FEV (ml)")
+
+# Calculate correlation coefficient
+correlation_bmi <- cor(chs_imputed$bmi, chs_imputed$fev, use = "complete.obs")
+
+# --- EDA Step 3: Key Question 2 (Smoke/Gas vs. FEV) ---
+# Question: What is the association between smoke/gas exposure and FEV?
+ggplot(chs_imputed, aes(x = smoke_gas_exposure, y = fev, fill = smoke_gas_exposure)) +
+  geom_boxplot() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  labs(title = "Association between Smoke/Gas Exposure and FEV",
+       x = "Exposure Group", y = "FEV (ml)")
+
+# --- EDA Step 4: Key Question 3 (PM2.5 vs. FEV) ---
+# Question: What is the association between PM2.5 exposure and FEV?
+ggplot(chs_imputed, aes(x = pm25_mass, y = fev)) +
+  geom_point(alpha = 0.3, color = "darkgreen") +
+  geom_smooth(method = "lm", color = "red") +
+  theme_minimal() +
+  labs(title = "Association between PM2.5 and FEV",
+       x = "PM2.5 Mass Concentration", y = "FEV (ml)")
+```
+
+
+## Visualization (30 points)
+
+Create the following figures and interpret them. Be sure to include easily understandable axes, titles, and legends. 
+
+1. Facet plot showing scatterplots with regression lines of  BMI vs FEV by “townname”.
+```{r}
+library(leaflet)
+
+# 1. Facet Plot of BMI vs FEV
+ggplot(chs_imputed, aes(x = bmi, y = fev)) +
+  geom_point(alpha = 0.4, color = "darkblue") +
+  geom_smooth(method = "lm", color = "red") +
+  facet_wrap(~townname) +               
+  labs(
+    title = "Association between BMI and FEV across Towns",
+    x = "Body Mass Index (BMI)",
+    y = "Forced Expiratory Volume (FEV)"
+  ) +
+  theme_bw()
+
+```
+Interpret: There is a consistent positive correlation between BMI and FEV across all 12 towns.
+
+2. Stacked histograms of FEV by BMI category and FEV by smoke/gas exposure. Use different color schemes than the ggplot default.
+```{r}
+# 2a. FEV by Obesity Level
+ggplot(chs_imputed, aes(x = fev, fill = obesity_level)) +
+  geom_histogram(binwidth = 100, color = "white") +
+  scale_fill_viridis_d(option = "D") + 
+  labs(
+    title = "Distribution of FEV by Obesity Level",
+    x = "FEV (ml)",
+    y = "Count",
+    fill = "Obesity Level"
+  ) +
+  theme_minimal()
+
+# 2b. FEV by Smoke/Gas Exposure
+ggplot(chs_imputed, aes(x = fev, fill = smoke_gas_exposure)) +
+  geom_histogram(binwidth = 100, color = "white") +
+  scale_fill_brewer(palette = "Set2") + 
+  labs(
+    title = "Distribution of FEV by Smoke/Gas Exposure",
+    x = "FEV (ml)",
+    y = "Count",
+    fill = "Exposure Group"
+  ) +
+  theme_minimal()
+
+```
+Interpret: These two figures suggest that smoke/gas exposure does not have as strong or obvious a correlation with FEV as BMI does.
+
+3. Barchart of BMI by smoke/gas exposure.
+```{r}
+ggplot(chs_imputed, aes(x = smoke_gas_exposure, y = bmi, fill = smoke_gas_exposure)) +
+  stat_summary(fun = "mean", geom = "bar", color = "black", alpha = 0.7) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  labs(
+    title = "Average BMI by Smoke/Gas Exposure",
+    x = "Exposure Group",
+    y = "Average BMI"
+  ) +
+  theme_classic() +
+  theme(legend.position = "none") 
+```
+Interpret: The average BMI is consistent across all four exposure categories. Because the average BMI is essentially the same for all groups, BMI is likely not a confounding variable in the relationship between exposure and FEV.
+
+4. Statistical summary graphs of FEV by BMI and FEV by smoke/gas exposure category.
+```{r}
+# 4a. FEV by BMI Category
+ggplot(chs_imputed, aes(x = obesity_level, y = fev, fill = obesity_level)) +
+  geom_boxplot() +
+  labs(
+    title = "FEV by Obesity Level",
+    x = "Obesity Category",
+    y = "FEV (ml)"
+  ) +
+  theme_light()
+
+# 4b. FEV by Smoke/Gas Exposure
+ggplot(chs_imputed, aes(x = smoke_gas_exposure, y = fev, fill = smoke_gas_exposure)) +
+  geom_boxplot() +
+  labs(
+    title = "FEV by Smoke/Gas Exposure",
+    x = "Exposure Group",
+    y = "FEV (ml)"
+  ) +
+  theme_light()
+```
+Interpret: 
+There is a distinct, stepwise increase in lung function (FEV) as obesity level increases. Smoke and gas exposure do not show a dramatic impact on FEV.
+
+5. A leaflet map showing the concentrations of PM2.5 mass in each of the CHS communities.
+```{r}
+# 5. Leaflet Map
+library(dplyr)
+library(leaflet)
+
+# aggregate by town to get one row per town, with its Lat/Lon and PM2.5
+town_data <- chs_imputed %>%
+  group_by(townname) %>%
+  summarise(
+    lat = first(lat),           
+    lon = first(lon),           
+    pm25 = first(pm25_mass)   
+  )
+
+# Create color palette for PM2.5
+pal <- colorNumeric(palette = "YlOrRd", domain = town_data$pm25)
+
+leaflet(town_data) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addCircleMarkers(
+    lng = ~lon,
+    lat = ~lat,
+    color = ~pal(pm25),
+    fillOpacity = 0.8,
+    radius = 8,
+    popup = ~paste("Town:", townname, "<br>", "PM2.5:", pm25)
+  ) %>%
+  addLegend("bottomright", pal = pal, values = ~pm25,
+            title = "PM2.5 Mass", opacity = 1)
+
+```
+Interpret: The map reveals a clear spatial gradient where PM2.5 concentrations increase as you move inland from the coast.
+
+6. Choose a visualization to examine whether PM2.5 mass is associated with FEV.
+```{r}
+ggplot(chs_imputed, aes(x = pm25_mass, y = fev)) +
+  geom_point(alpha = 0.2, color = "darkgreen") +
+  geom_smooth(method = "lm", color = "black") +
+  labs(
+    title = "Association between PM2.5 Mass and FEV",
+    x = "PM2.5 Mass Concentration",
+    y = "FEV (ml)"
+  ) +
+  theme_minimal()
+
+```
+Interpret: This figure suggests that higher PM2.5 concentrations are associated with slightly lower lung function (FEV), but the association is relatively weak.

@@ -1,0 +1,279 @@
+---
+title: "Lab 6 - Text Mining"
+link-citations: true
+toc: false
+format:
+  html:
+    embed-resources: true
+---
+
+```{r setup}
+knitr::opts_chunk$set(eval = FALSE, include  = TRUE)
+```
+
+# Learning goals
+
+- Use `unnest_tokens()` and `unnest_ngrams()` to extract tokens and n-grams from text.
+- Use dplyr and ggplot2 to analyze text data
+
+# Lab description
+
+For this lab (due Tuesday Feb 24th at 8:30am EST) we will be working with a new text-based dataset consisting of transcribed medical reports.
+The dataset contains transcription samples from [https://www.mtsamples.com/](https://www.mtsamples.com/).
+We have created a (somewhat) cleaned version of the data, which can be found at [https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/mtsamples/mtsamples.csv](https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/mtsamples/mtsamples.csv).
+
+
+### Setup packages
+
+You should load in `dplyr`, `ggplot2` and `tidytext`.
+If you don't already have `tidytext` then you can install with
+
+```{r, eval=FALSE}
+install.packages("tidytext")
+```
+
+### Read in Medical Transcriptions
+
+Loading in the cleaned data from the `BIOSTAT620W26` repository:
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidytext)
+
+setwd("C:/Users/chuntseh/Downloads/BIOSTAT620W26")
+mt_samples <- read.csv("mtsamples.csv", stringsAsFactors = FALSE)
+```
+
+---
+
+## Question 1: What specialties do we have?
+
+Use the `count()` function from `dplyr` to figure out how many different categories we have in the data.
+Are these categories related? Overlapping? Evenly distributed?
+```{r}
+# Count the number of transcription records per medical specialty
+specialty_counts <- mt_samples %>%
+  count(medical_specialty, sort = TRUE)
+
+
+specialty_counts %>%
+  mutate(medical_specialty = reorder(medical_specialty, n)) %>%
+  ggplot(aes(x = n, y = medical_specialty)) +
+  geom_col(fill = "blue") +
+  labs(
+    title = "All Medical Specialties by Record Count",
+    x = "Number of Transcriptions",
+    y = "Medical Specialty"
+  ) +
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 7))
+```
+40 different categories in the data.
+Are these categories related? Overlapping? Evenly distributed?
+Yes, some categories are related and there is some overlapping like "Surgery" and "Neurosurgery."
+No, the distribution is highly skewed for "Surgery."
+
+---
+
+## Question 2
+
+- Tokenize the the words in the `transcription` column
+- Count the number of times each token appears
+- Visualize the top 20 most frequent words
+
+Explain what we see from this result.
+Does it makes sense? What insights (if any) do we get?
+```{r}
+# 1. Tokenize the words in the transcription column
+tokens <- mt_samples %>%
+  filter(!is.na(transcription)) %>% 
+  unnest_tokens(word, transcription)
+
+# 2. Count the number of times each token appears
+word_counts <- tokens %>%
+  count(word, sort = TRUE)
+
+# 3. Visualize the top 20 most frequent words
+word_counts %>%
+  top_n(20, n) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(x = n, y = word)) +
+  geom_col(fill = "orange") +
+  labs(
+    title = "Top 20 Most Frequent Words in Transcriptions",
+    x = "Frequency",
+    y = "Word"
+  ) +
+  theme_minimal()
+```
+The top 20 words are almost common English "stop words" (like "the," "and," "was"), not medical terms.
+
+Yes, it makes sense. These medical reports may be written in standard English sentences, so basic grammatical words will naturally appear most frequently.
+
+Raw text data is too noisy for analysis.
+
+---
+
+## Question 3
+
+- Re-do the visualization but remove stop words before making it
+- Bonus points if you remove numbers as well
+
+What do we see know that we have removed stop words?
+Does it give us a better idea of what the text is about?
+```{r}
+# Load the stop_words dataset from tidytext
+data("stop_words")
+
+# 1. Tokenize, remove stop words, and remove numbers
+tokens_clean <- mt_samples %>%
+  filter(!is.na(transcription)) %>% 
+  unnest_tokens(word, transcription) %>%
+  anti_join(stop_words, by = "word") %>%
+  filter(!grepl("^[0-9]+$", word))
+
+# 2. Count the words and visualize the top 20
+tokens_clean %>%
+  count(word, sort = TRUE) %>%
+  top_n(20, n) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(x = n, y = word)) +
+  geom_col(fill = "green") +
+  labs(
+    title = "Top 20 Most Frequent Words",
+    x = "Frequency",
+    y = "Word"
+  ) +
+  theme_minimal()
+```
+The most frequent words are now medical terms (e.g., "patient," "procedure," "diagnosis," "anesthesia," "mg") .
+
+It clearly reveals that these documents are records detailing medical procedures.
+---
+
+# Question 4
+
+Repeat question 2, but this time tokenize into bi-grams.
+How does the result change if you look at tri-grams?
+
+```{r}
+# 1. Tokenize into bi-grams
+bigrams <- mt_samples %>%
+  filter(!is.na(transcription)) %>% 
+  unnest_tokens(bigram, transcription, token = "ngrams", n = 2)
+
+# 2. Count and visualize top 20 bi-grams
+bigrams %>%
+  count(bigram, sort = TRUE) %>%
+  top_n(20, n) %>%
+  mutate(bigram = reorder(bigram, n)) %>%
+  ggplot(aes(x = n, y = bigram)) +
+  geom_col(fill = "blue") +
+  labs(
+    title = "Top 20 Most Frequent Bi-grams",
+    x = "Frequency",
+    y = "Bi-gram"
+  ) +
+  theme_minimal()
+
+# 3. Code to check tri-grams (for answering the discussion question)
+trigrams <- mt_samples %>%
+  filter(!is.na(transcription)) %>% 
+  unnest_tokens(trigram, transcription, token = "ngrams", n = 3) %>%
+  count(trigram, sort = TRUE)
+
+head(trigrams, 10)
+```
+
+---
+
+# Question 5
+
+Using the results you got from Question 4, pick a word and count the words that appear before and after it.
+```{r}
+# Load tidyr for the separate() function
+library(tidyr)
+
+# 1. Separate the bigrams into two distinct word columns
+bigrams_separated <- bigrams %>%
+  separate(bigram, into = c("word1", "word2"), sep = " ")
+
+# 2. Pick "patient"
+target_word <- "patient"
+
+# 3. Count words that appear BEFORE "patient" 
+words_before_patient <- bigrams_separated %>%
+  filter(word2 == target_word) %>%
+  count(word1, sort = TRUE)
+
+# 4. Count words that appear AFTER "patient"
+words_after_patient <- bigrams_separated %>%
+  filter(word1 == target_word) %>%
+  count(word2, sort = TRUE)
+
+# View the top 10 words before and after
+head(words_before_patient, 10)
+head(words_after_patient, 10)
+```
+
+---
+
+# Question 6 
+
+Which words are most used in each of the specialties?
+You can use `group_by()` and `top_n()` from `dplyr` to have the calculations be done within each specialty.
+Remember to remove stop words.
+What are the 5 most-used words for each specialty?
+```{r}
+# 1. Tokenize text and remove stop words
+specialty_words <- mt_samples %>%
+  filter(!is.na(transcription)) %>%
+  unnest_tokens(word, transcription) %>%
+  anti_join(stop_words, by = "word") %>%
+  filter(!grepl("^[0-9]+$", word)) 
+
+# 2. Count words by specialty and get the top 5
+top_specialty_words <- specialty_words %>%
+  count(medical_specialty, word) %>%
+  group_by(medical_specialty) %>%
+  top_n(5, n) %>%
+  ungroup() %>%
+  arrange(medical_specialty, desc(n))
+
+print(top_specialty_words, n=210)
+```
+
+# Question 7 - extra
+
+Find your own insight in the data:
+
+Ideas:
+
+- Interesting n-grams
+- See if certain words are used more in some specialties than others
+```{r}
+# Calculate tf-idf to find words unique to certain specialties
+specialty_tf_idf <- specialty_words %>%
+  count(medical_specialty, word, sort = TRUE) %>%
+  bind_tf_idf(word, medical_specialty, n)
+
+# Visualize
+specialty_tf_idf %>%
+  mutate(medical_specialty_clean = trimws(medical_specialty)) %>% 
+  filter(medical_specialty_clean %in% c("Psychiatry / Psychology", "Orthopedic", "Radiology", "Cardiovascular / Pulmonary")) %>%
+  group_by(medical_specialty_clean) %>%
+  top_n(5, tf_idf) %>%
+  ungroup() %>%
+  mutate(word = reorder_within(word, tf_idf, medical_specialty_clean)) %>%
+  ggplot(aes(x = tf_idf, y = word, fill = medical_specialty_clean)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~medical_specialty_clean, ncol = 2, scales = "free") +
+  scale_y_reordered() +
+  labs(
+    title = "Highest TF-IDF Words in Select Medical Specialties",
+    x = "TF-IDF Score",
+    y = NULL
+  ) +
+  theme_minimal()
+```
+

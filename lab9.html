@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<!-- saved from url=(0022)http://localhost:4439/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<meta charset="utf-8">
+
 <meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Lab 9 - SQL</title>
-<style>
+<style class="anchorjs"></style><style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -58,25 +59,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="lab9_files/libs/clipboard/clipboard.min.js"></script>
-<script src="lab9_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="lab9_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="lab9_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="lab9_files/libs/quarto-html/popper.min.js"></script>
-<script src="lab9_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="lab9_files/libs/quarto-html/anchor.min.js"></script>
-<link href="lab9_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="lab9_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="lab9_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="lab9_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="lab9_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="./lab9_files/clipboard.min.js.download"></script>
+<script src="./lab9_files/quarto.js.download" type="module"></script>
+<script src="./lab9_files/tabsets.js.download" type="module"></script>
+<script src="./lab9_files/axe-check.js.download" type="module"></script>
+<script src="./lab9_files/popper.min.js.download"></script>
+<script src="./lab9_files/tippy.umd.min.js.download"></script>
+<script src="./lab9_files/anchor.min.js.download"></script>
+<link href="./lab9_files/tippy.css" rel="stylesheet">
+<link href="./lab9_files/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="./lab9_files/bootstrap.min.js.download"></script>
+<link href="./lab9_files/bootstrap-icons.css" rel="stylesheet">
+<link href="./lab9_files/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
-</head>
+<style>.ansi-display{font-family:monospace;white-space:pre-wrap;--ansiBlack: #000000;--ansiRed: #cd3131;--ansiGreen: #00BC00;--ansiYellow: #949800;--ansiBlue: #0451a5;--ansiMagenta: #bc05bc;--ansiCyan: #0598bc;--ansiWhite: #555555;--ansiBrightBlack: #666666;--ansiBrightRed: #cd3131;--ansiBrightGreen: #14CE14;--ansiBrightYellow: #b5ba00;--ansiBrightBlue: #0451a5;--ansiBrightMagenta: #bc05bc;--ansiBrightCyan: #0598bc;--ansiBrightWhite: #a5a5a5}.dark-mode .ansi-display{--ansiBlack: #000000;--ansiRed: #cd3131;--ansiGreen: #0DBC79;--ansiYellow: #e5e510;--ansiBlue: #2472c8;--ansiMagenta: #bc3fbc;--ansiCyan: #11a8cd;--ansiWhite: #e5e5e5;--ansiBrightBlack: #666666;--ansiBrightRed: #f14c4c;--ansiBrightGreen: #23d18b;--ansiBrightYellow: #f5f543;--ansiBrightBlue: #3b8eea;--ansiBrightMagenta: #d670d6;--ansiBrightCyan: #29b8db;--ansiBrightWhite: #e5e5e5}@keyframes ansi-displaly-run-blink{50%{opacity:0}}.fui-FluentProvider h2{border-bottom:none;padding-bottom:0}</style><style data-make-styles-bucket="d" data-priority="0"></style><style id="fui-FluentProviderr0"></style></head>
 
-<body class="fullcontent quarto-light">
+<body class="fullcontent quarto-light" data-tabster="{&quot;root&quot;:{}}">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<i tabindex="0" role="none" data-tabster-dummy="" aria-hidden="true" style="position: fixed; height: 1px; width: 1px; opacity: 0.001; z-index: -1; content-visibility: hidden; top: 0px; left: 0px;"></i><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 
 <main class="content" id="quarto-document-content">
 
@@ -100,35 +101,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="intro" class="level2">
-<h2 class="anchored" data-anchor-id="intro">Intro</h2>
+<h2 class="anchored" data-anchor-id="intro">Intro<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#intro" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>In this lab, you will be working with a hospital database. There will be four tables that we will be working with: <strong>doctor</strong>, <strong>visit</strong>, <strong>patient</strong>, and <strong>payment</strong>. The main goal of the lab is to gain experience working with SQL databases. First, we will set up our SQL database:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c("RSQLite", "DBI"))</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a temporary in memory database</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="st">":memory:"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Download tables</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>doctor <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/doctor.csv"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>visit <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/visit.csv"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>patient <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/patient.csv"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>payment <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/payment.csv"</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy data.frames to database</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"doctor"</span>, doctor)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"visit"</span>, visit)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"patient"</span>, patient)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"payment"</span>, payment)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="http://localhost:4439/#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c("RSQLite", "DBI"))</span></span>
+<span id="cb1-2"><a href="http://localhost:4439/#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="http://localhost:4439/#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
+<span id="cb1-4"><a href="http://localhost:4439/#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb1-5"><a href="http://localhost:4439/#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="http://localhost:4439/#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a temporary in memory database</span></span>
+<span id="cb1-7"><a href="http://localhost:4439/#cb1-7" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">SQLite</span>(), <span class="st">":memory:"</span>)</span>
+<span id="cb1-8"><a href="http://localhost:4439/#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="http://localhost:4439/#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Download tables</span></span>
+<span id="cb1-10"><a href="http://localhost:4439/#cb1-10" aria-hidden="true" tabindex="-1"></a>doctor <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/doctor.csv"</span>)</span>
+<span id="cb1-11"><a href="http://localhost:4439/#cb1-11" aria-hidden="true" tabindex="-1"></a>visit <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/visit.csv"</span>)</span>
+<span id="cb1-12"><a href="http://localhost:4439/#cb1-12" aria-hidden="true" tabindex="-1"></a>patient <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/patient.csv"</span>)</span>
+<span id="cb1-13"><a href="http://localhost:4439/#cb1-13" aria-hidden="true" tabindex="-1"></a>payment <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/dmcable/BIOSTAT620W26/main/data/hospital/payment.csv"</span>)</span>
+<span id="cb1-14"><a href="http://localhost:4439/#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="http://localhost:4439/#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy data.frames to database</span></span>
+<span id="cb1-16"><a href="http://localhost:4439/#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"doctor"</span>, doctor)</span>
+<span id="cb1-17"><a href="http://localhost:4439/#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"visit"</span>, visit)</span>
+<span id="cb1-18"><a href="http://localhost:4439/#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"patient"</span>, patient)</span>
+<span id="cb1-19"><a href="http://localhost:4439/#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"payment"</span>, payment)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="http://localhost:4439/#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "doctor"  "patient" "payment" "visit"  </code></pre>
+</div>
 </div>
 <p>TIP: You can use the following QUERY to see the structure of a table</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>PRAGMA table_info(doctor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="http://localhost:4439/#cb4-1" aria-hidden="true" tabindex="-1"></a>PRAGMA table_info(doctor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>4 records</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">cid</th>
+<th style="text-align: left;">name</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: right;">notnull</th>
+<th style="text-align: left;">dflt_value</th>
+<th style="text-align: right;">pk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">doctor_id</td>
+<td style="text-align: left;">INTEGER</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">first_name</td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">last_name</td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">last_update</td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <p>SQL references:</p>
 <p><a href="https://www.w3schools.com/sql/">https://www.w3schools.com/sql/</a></p>
@@ -137,56 +190,464 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Exercise 1</h1>
 <p>Edit the code below to retrieve the doctor ID, first name and last name for all doctors using the <code>doctor</code> table. Sort by last name and then by first name (note that the code chunk below is set up to run SQL code rather than R code).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor_id, first_name, last_name</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> last_name, first_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="http://localhost:4439/#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor_id, first_name, last_name</span>
+<span id="cb5-2"><a href="http://localhost:4439/#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
+<span id="cb5-3"><a href="http://localhost:4439/#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> last_name, first_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">doctor_id</th>
+<th style="text-align: left;">first_name</th>
+<th style="text-align: left;">last_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">58</td>
+<td style="text-align: left;">CHRISTIAN</td>
+<td style="text-align: left;">AKROYD</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">182</td>
+<td style="text-align: left;">DEBBIE</td>
+<td style="text-align: left;">AKROYD</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">92</td>
+<td style="text-align: left;">KIRSTEN</td>
+<td style="text-align: left;">AKROYD</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">118</td>
+<td style="text-align: left;">CUBA</td>
+<td style="text-align: left;">ALLEN</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">145</td>
+<td style="text-align: left;">KIM</td>
+<td style="text-align: left;">ALLEN</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">194</td>
+<td style="text-align: left;">MERYL</td>
+<td style="text-align: left;">ALLEN</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">76</td>
+<td style="text-align: left;">ANGELINA</td>
+<td style="text-align: left;">ASTAIRE</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">112</td>
+<td style="text-align: left;">RUSSELL</td>
+<td style="text-align: left;">BACALL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">190</td>
+<td style="text-align: left;">AUDREY</td>
+<td style="text-align: left;">BAILEY</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">67</td>
+<td style="text-align: left;">JESSICA</td>
+<td style="text-align: left;">BAILEY</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-2" class="level1">
 <h1>Exercise 2</h1>
 <p>Retrieve the doctor ID, first name, and last name for doctors whose last name equals ‘WILLIAMS’ or ‘DAVIS’.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor_id, first_name, last_name</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> last_name <span class="kw">IN</span> (<span class="st">'WILLIAMS'</span>, <span class="st">'DAVIS'</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="http://localhost:4439/#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor_id, first_name, last_name</span>
+<span id="cb6-2"><a href="http://localhost:4439/#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
+<span id="cb6-3"><a href="http://localhost:4439/#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> last_name <span class="kw">IN</span> (<span class="st">'WILLIAMS'</span>, <span class="st">'DAVIS'</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>6 records</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">doctor_id</th>
+<th style="text-align: left;">first_name</th>
+<th style="text-align: left;">last_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">JENNIFER</td>
+<td style="text-align: left;">DAVIS</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">72</td>
+<td style="text-align: left;">SEAN</td>
+<td style="text-align: left;">WILLIAMS</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">101</td>
+<td style="text-align: left;">SUSAN</td>
+<td style="text-align: left;">DAVIS</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">110</td>
+<td style="text-align: left;">SUSAN</td>
+<td style="text-align: left;">DAVIS</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">137</td>
+<td style="text-align: left;">MORGAN</td>
+<td style="text-align: left;">WILLIAMS</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">172</td>
+<td style="text-align: left;">GROUCHO</td>
+<td style="text-align: left;">WILLIAMS</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-3" class="level1">
 <h1>Exercise 3</h1>
 <p>Write a query against the <code>visit</code> table that returns the IDs of the patients who visited a hospital starting on July 5, 2005 (use the visit_start_date column, and you can use the <code>date()</code> function to ignore the time component). Include a single row for each distinct patient ID.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> patient_id</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="dt">date</span>(visit_start_date) <span class="op">=</span> <span class="st">'2005-07-05'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="http://localhost:4439/#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> patient_id</span>
+<span id="cb7-2"><a href="http://localhost:4439/#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit</span>
+<span id="cb7-3"><a href="http://localhost:4439/#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="dt">date</span>(visit_start_date) <span class="op">=</span> <span class="st">'2005-07-05'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">patient_id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">565</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">242</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">594</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">490</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">476</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">322</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">298</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-4" class="level1">
 <h1>Exercise 4</h1>
 <section id="exercise-4.1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4.1">Exercise 4.1</h2>
+<h2 class="anchored" data-anchor-id="exercise-4.1">Exercise 4.1<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-4.1" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Construct a query that retrieves all columns of rows from the <code>payment</code> table where the amount is either 199, 799, or 999.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> amount <span class="kw">IN</span> (<span class="dv">199</span>, <span class="dv">799</span>, <span class="dv">999</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="http://localhost:4439/#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb8-2"><a href="http://localhost:4439/#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
+<span id="cb8-3"><a href="http://localhost:4439/#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> amount <span class="kw">IN</span> (<span class="dv">199</span>, <span class="dv">799</span>, <span class="dv">999</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">payment_id</th>
+<th style="text-align: right;">patient_id</th>
+<th style="text-align: right;">visit_id</th>
+<th style="text-align: right;">amount</th>
+<th style="text-align: left;">payment_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">16050</td>
+<td style="text-align: right;">269</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: left;">2007-01-24 21:40:19.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16056</td>
+<td style="text-align: right;">270</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: left;">2007-01-26 05:10:14.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16081</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: left;">2007-01-25 04:49:12.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16103</td>
+<td style="text-align: right;">294</td>
+<td style="text-align: right;">595</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: left;">2007-01-28 12:28:20.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16133</td>
+<td style="text-align: right;">307</td>
+<td style="text-align: right;">614</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: left;">2007-01-28 14:01:54.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16158</td>
+<td style="text-align: right;">316</td>
+<td style="text-align: right;">1065</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: left;">2007-01-31 07:23:22.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16160</td>
+<td style="text-align: right;">318</td>
+<td style="text-align: right;">224</td>
+<td style="text-align: right;">999</td>
+<td style="text-align: left;">2007-01-26 08:46:53.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16161</td>
+<td style="text-align: right;">319</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">999</td>
+<td style="text-align: left;">2007-01-24 23:07:48.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16180</td>
+<td style="text-align: right;">330</td>
+<td style="text-align: right;">967</td>
+<td style="text-align: right;">799</td>
+<td style="text-align: left;">2007-01-30 17:40:32.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16206</td>
+<td style="text-align: right;">351</td>
+<td style="text-align: right;">1137</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: left;">2007-01-31 17:48:40.996577</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-4.2" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4.2">Exercise 4.2</h2>
+<h2 class="anchored" data-anchor-id="exercise-4.2">Exercise 4.2<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-4.2" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Construct a query that retrieves all columns of rows from the <code>payment</code> table where the amount is greater then 500.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> amount <span class="op">&gt;</span> <span class="dv">500</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="http://localhost:4439/#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb9-2"><a href="http://localhost:4439/#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
+<span id="cb9-3"><a href="http://localhost:4439/#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> amount <span class="op">&gt;</span> <span class="dv">500</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">payment_id</th>
+<th style="text-align: right;">patient_id</th>
+<th style="text-align: right;">visit_id</th>
+<th style="text-align: right;">amount</th>
+<th style="text-align: left;">payment_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">16052</td>
+<td style="text-align: right;">269</td>
+<td style="text-align: right;">678</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-28 21:44:14.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16058</td>
+<td style="text-align: right;">271</td>
+<td style="text-align: right;">1096</td>
+<td style="text-align: right;">899</td>
+<td style="text-align: left;">2007-01-31 11:59:15.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16060</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">405</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-27 12:01:05.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16061</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">1041</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-31 04:14:49.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16068</td>
+<td style="text-align: right;">274</td>
+<td style="text-align: right;">394</td>
+<td style="text-align: right;">599</td>
+<td style="text-align: left;">2007-01-27 09:54:37.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16073</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: right;">860</td>
+<td style="text-align: right;">1099</td>
+<td style="text-align: left;">2007-01-30 01:13:42.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16074</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">308</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-26 20:30:05.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16082</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-26 17:24:52.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16086</td>
+<td style="text-align: right;">284</td>
+<td style="text-align: right;">1145</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-31 18:42:11.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16087</td>
+<td style="text-align: right;">286</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-25 10:43:45.996577</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-4.3" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4.3">Exercise 4.3</h2>
+<h2 class="anchored" data-anchor-id="exercise-4.3">Exercise 4.3<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-4.3" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Construct a query that retrieves all columns of rows from the <code>payment</code> table where the amount is greater then 500 and less then 800.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> amount <span class="op">&gt;</span> <span class="dv">500</span> <span class="kw">AND</span> amount <span class="op">&lt;</span> <span class="dv">800</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="http://localhost:4439/#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb10-2"><a href="http://localhost:4439/#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
+<span id="cb10-3"><a href="http://localhost:4439/#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> amount <span class="op">&gt;</span> <span class="dv">500</span> <span class="kw">AND</span> amount <span class="op">&lt;</span> <span class="dv">800</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">payment_id</th>
+<th style="text-align: right;">patient_id</th>
+<th style="text-align: right;">visit_id</th>
+<th style="text-align: right;">amount</th>
+<th style="text-align: left;">payment_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">16052</td>
+<td style="text-align: right;">269</td>
+<td style="text-align: right;">678</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-28 21:44:14.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16060</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">405</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-27 12:01:05.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16061</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">1041</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-31 04:14:49.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16068</td>
+<td style="text-align: right;">274</td>
+<td style="text-align: right;">394</td>
+<td style="text-align: right;">599</td>
+<td style="text-align: left;">2007-01-27 09:54:37.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16074</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">308</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-26 20:30:05.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16082</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-26 17:24:52.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16086</td>
+<td style="text-align: right;">284</td>
+<td style="text-align: right;">1145</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-31 18:42:11.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16087</td>
+<td style="text-align: right;">286</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-25 10:43:45.996577</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">16092</td>
+<td style="text-align: right;">288</td>
+<td style="text-align: right;">427</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: left;">2007-01-27 14:38:30.996577</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16094</td>
+<td style="text-align: right;">288</td>
+<td style="text-align: right;">565</td>
+<td style="text-align: right;">599</td>
+<td style="text-align: left;">2007-01-28 07:54:57.996577</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 </section>
@@ -194,51 +655,238 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Exercise 5</h1>
 <p>Retrieve all the payment IDs and their amounts from the patients whose last name is ‘DAVIS’.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> payment.payment_id, payment.amount</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INNER</span> <span class="kw">JOIN</span> patient </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> payment.patient_id <span class="op">=</span> patient.patient_id</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">AND</span> patient.last_name <span class="op">=</span> <span class="st">'DAVIS'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="http://localhost:4439/#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> payment.payment_id, payment.amount</span>
+<span id="cb11-2"><a href="http://localhost:4439/#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
+<span id="cb11-3"><a href="http://localhost:4439/#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INNER</span> <span class="kw">JOIN</span> patient </span>
+<span id="cb11-4"><a href="http://localhost:4439/#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> payment.patient_id <span class="op">=</span> patient.patient_id</span>
+<span id="cb11-5"><a href="http://localhost:4439/#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">AND</span> patient.last_name <span class="op">=</span> <span class="st">'DAVIS'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>3 records</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">payment_id</th>
+<th style="text-align: right;">amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">16685</td>
+<td style="text-align: right;">499</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16686</td>
+<td style="text-align: right;">299</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">16687</td>
+<td style="text-align: right;">99</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-6" class="level1">
 <h1>Exercise 6</h1>
 <section id="exercise-6.1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6.1">Exercise 6.1</h2>
+<h2 class="anchored" data-anchor-id="exercise-6.1">Exercise 6.1<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-6.1" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Use <code>COUNT(*)</code> to count the number of rows in <code>visit</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="http://localhost:4439/#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
+<span id="cb12-2"><a href="http://localhost:4439/#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>1 records</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">COUNT(*)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">16044</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-6.2" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6.2">Exercise 6.2</h2>
+<h2 class="anchored" data-anchor-id="exercise-6.2">Exercise 6.2<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-6.2" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Use <code>COUNT(*)</code> and <code>GROUP BY</code> to count the number of visits for each <code>patient_id</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> visit_count</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="http://localhost:4439/#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> visit_count</span>
+<span id="cb13-2"><a href="http://localhost:4439/#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit</span>
+<span id="cb13-3"><a href="http://localhost:4439/#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">patient_id</th>
+<th style="text-align: right;">visit_count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">27</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: right;">25</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-6.3" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6.3">Exercise 6.3</h2>
+<h2 class="anchored" data-anchor-id="exercise-6.3">Exercise 6.3<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-6.3" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Repeat the previous query and sort by the count in descending order.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> visit_count</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> visit_count <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="http://localhost:4439/#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> visit_count</span>
+<span id="cb14-2"><a href="http://localhost:4439/#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit</span>
+<span id="cb14-3"><a href="http://localhost:4439/#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id</span>
+<span id="cb14-4"><a href="http://localhost:4439/#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> visit_count <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">patient_id</th>
+<th style="text-align: right;">visit_count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">148</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">526</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">236</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">144</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">469</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">468</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">178</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">137</td>
+<td style="text-align: right;">39</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-6.4" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6.4">Exercise 6.4</h2>
+<h2 class="anchored" data-anchor-id="exercise-6.4">Exercise 6.4<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-6.4" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Repeat the previous query but use <code>HAVING</code> to only keep the groups with 40 or more.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> visit_count</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> visit_count <span class="op">&gt;=</span> <span class="dv">40</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> visit_count <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="http://localhost:4439/#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> visit_count</span>
+<span id="cb15-2"><a href="http://localhost:4439/#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> visit</span>
+<span id="cb15-3"><a href="http://localhost:4439/#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id</span>
+<span id="cb15-4"><a href="http://localhost:4439/#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> visit_count <span class="op">&gt;=</span> <span class="dv">40</span></span>
+<span id="cb15-5"><a href="http://localhost:4439/#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> visit_count <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>7 records</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">patient_id</th>
+<th style="text-align: right;">visit_count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">148</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">526</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">236</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">144</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">469</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">40</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 </section>
@@ -246,85 +894,431 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Exercise 7</h1>
 <p>Write a query that calculates a number of summary statistics for <code>amount</code> in the payment table using <code>MAX</code>, <code>MIN</code>, <code>AVG</code> and <code>SUM</code></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">MAX</span>(amount) <span class="kw">AS</span> max_amount, </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(amount) <span class="kw">AS</span> min_amount, </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(amount) <span class="kw">AS</span> avg_amount, </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(amount) <span class="kw">AS</span> total_amount</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="http://localhost:4439/#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">MAX</span>(amount) <span class="kw">AS</span> max_amount, </span>
+<span id="cb16-2"><a href="http://localhost:4439/#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(amount) <span class="kw">AS</span> min_amount, </span>
+<span id="cb16-3"><a href="http://localhost:4439/#cb16-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(amount) <span class="kw">AS</span> avg_amount, </span>
+<span id="cb16-4"><a href="http://localhost:4439/#cb16-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(amount) <span class="kw">AS</span> total_amount</span>
+<span id="cb16-5"><a href="http://localhost:4439/#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>1 records</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">max_amount</th>
+<th style="text-align: right;">min_amount</th>
+<th style="text-align: right;">avg_amount</th>
+<th style="text-align: right;">total_amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1199</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">416.9775</td>
+<td style="text-align: right;">482443</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <section id="exercise-7.1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7.1">Exercise 7.1</h2>
+<h2 class="anchored" data-anchor-id="exercise-7.1">Exercise 7.1<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-7.1" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Modify the above query to do those calculations for each <code>patient_id</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MAX</span>(amount) <span class="kw">AS</span> max_amount, </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(amount) <span class="kw">AS</span> min_amount, </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(amount) <span class="kw">AS</span> avg_amount, </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(amount) <span class="kw">AS</span> total_amount</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a href="http://localhost:4439/#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, </span>
+<span id="cb17-2"><a href="http://localhost:4439/#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MAX</span>(amount) <span class="kw">AS</span> max_amount, </span>
+<span id="cb17-3"><a href="http://localhost:4439/#cb17-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(amount) <span class="kw">AS</span> min_amount, </span>
+<span id="cb17-4"><a href="http://localhost:4439/#cb17-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(amount) <span class="kw">AS</span> avg_amount, </span>
+<span id="cb17-5"><a href="http://localhost:4439/#cb17-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(amount) <span class="kw">AS</span> total_amount</span>
+<span id="cb17-6"><a href="http://localhost:4439/#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
+<span id="cb17-7"><a href="http://localhost:4439/#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">patient_id</th>
+<th style="text-align: right;">max_amount</th>
+<th style="text-align: right;">min_amount</th>
+<th style="text-align: right;">avg_amount</th>
+<th style="text-align: right;">total_amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">299</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">199.0000</td>
+<td style="text-align: right;">398</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">499</td>
+<td style="text-align: right;">499</td>
+<td style="text-align: right;">499.0000</td>
+<td style="text-align: right;">499</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">299</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: right;">249.0000</td>
+<td style="text-align: right;">498</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">332.3333</td>
+<td style="text-align: right;">997</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">499</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">299.0000</td>
+<td style="text-align: right;">897</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">599</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">419.0000</td>
+<td style="text-align: right;">2095</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: right;">699.0000</td>
+<td style="text-align: right;">699</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">499</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">365.6667</td>
+<td style="text-align: right;">1097</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">499</td>
+<td style="text-align: right;">499</td>
+<td style="text-align: right;">499.0000</td>
+<td style="text-align: right;">499</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: right;">699.0000</td>
+<td style="text-align: right;">699</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-7.2" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7.2">Exercise 7.2</h2>
+<h2 class="anchored" data-anchor-id="exercise-7.2">Exercise 7.2<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-7.2" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Modify the above query to only keep the <code>patient_id</code>s that have more then 5 payments.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MAX</span>(amount) <span class="kw">AS</span> max_amount, </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(amount) <span class="kw">AS</span> min_amount, </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(amount) <span class="kw">AS</span> avg_amount, </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(amount) <span class="kw">AS</span> total_amount</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(payment_id) <span class="op">&gt;</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="http://localhost:4439/#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> patient_id, </span>
+<span id="cb18-2"><a href="http://localhost:4439/#cb18-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MAX</span>(amount) <span class="kw">AS</span> max_amount, </span>
+<span id="cb18-3"><a href="http://localhost:4439/#cb18-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(amount) <span class="kw">AS</span> min_amount, </span>
+<span id="cb18-4"><a href="http://localhost:4439/#cb18-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(amount) <span class="kw">AS</span> avg_amount, </span>
+<span id="cb18-5"><a href="http://localhost:4439/#cb18-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(amount) <span class="kw">AS</span> total_amount</span>
+<span id="cb18-6"><a href="http://localhost:4439/#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> payment</span>
+<span id="cb18-7"><a href="http://localhost:4439/#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> patient_id</span>
+<span id="cb18-8"><a href="http://localhost:4439/#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(payment_id) <span class="op">&gt;</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">patient_id</th>
+<th style="text-align: right;">max_amount</th>
+<th style="text-align: right;">min_amount</th>
+<th style="text-align: right;">avg_amount</th>
+<th style="text-align: right;">total_amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">999</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">449.0000</td>
+<td style="text-align: right;">2694</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">999</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">449.0000</td>
+<td style="text-align: right;">2694</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">799</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">399.0000</td>
+<td style="text-align: right;">2793</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">599</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">299.0000</td>
+<td style="text-align: right;">1794</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">399</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">261.5000</td>
+<td style="text-align: right;">2092</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">207</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">299.0000</td>
+<td style="text-align: right;">1794</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">239</td>
+<td style="text-align: right;">799</td>
+<td style="text-align: right;">299</td>
+<td style="text-align: right;">565.6667</td>
+<td style="text-align: right;">3394</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">245</td>
+<td style="text-align: right;">899</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">482.3333</td>
+<td style="text-align: right;">2894</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">251</td>
+<td style="text-align: right;">499</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: right;">332.3333</td>
+<td style="text-align: right;">1994</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">269</td>
+<td style="text-align: right;">699</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">315.6667</td>
+<td style="text-align: right;">1894</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-8.1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-8.1">Exercise 8.1</h2>
+<h2 class="anchored" data-anchor-id="exercise-8.1">Exercise 8.1<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-8.1" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>Create a SQL query to join the <code>doctor</code> and <code>visit</code> tables. Then, use SQL to compute the average visit length for each doctor. Hint: use the SQLite function <code>julianday</code> to convert a text date into a number.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor.doctor_id, doctor.first_name, doctor.last_name, </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(julianday(visit.visit_end_date) <span class="op">-</span> julianday(visit.visit_start_date)) <span class="kw">AS</span> avg_visit_length</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> visit <span class="kw">ON</span> doctor.doctor_id <span class="op">=</span> visit.doctor_id</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> doctor.doctor_id, doctor.first_name, doctor.last_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb19-1"><a href="http://localhost:4439/#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor.doctor_id, doctor.first_name, doctor.last_name, </span>
+<span id="cb19-2"><a href="http://localhost:4439/#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(julianday(visit.visit_end_date) <span class="op">-</span> julianday(visit.visit_start_date)) <span class="kw">AS</span> avg_visit_length</span>
+<span id="cb19-3"><a href="http://localhost:4439/#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
+<span id="cb19-4"><a href="http://localhost:4439/#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> visit <span class="kw">ON</span> doctor.doctor_id <span class="op">=</span> visit.doctor_id</span>
+<span id="cb19-5"><a href="http://localhost:4439/#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> doctor.doctor_id, doctor.first_name, doctor.last_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">doctor_id</th>
+<th style="text-align: left;">first_name</th>
+<th style="text-align: left;">last_name</th>
+<th style="text-align: right;">avg_visit_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">PENELOPE</td>
+<td style="text-align: left;">GUINESS</td>
+<td style="text-align: right;">4.252533</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">NICK</td>
+<td style="text-align: left;">WAHLBERG</td>
+<td style="text-align: right;">6.835764</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">ED</td>
+<td style="text-align: left;">CHASE</td>
+<td style="text-align: right;">5.737954</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">JENNIFER</td>
+<td style="text-align: left;">DAVIS</td>
+<td style="text-align: right;">6.402830</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">JOHNNY</td>
+<td style="text-align: left;">LOLLOBRIGIDA</td>
+<td style="text-align: right;">3.220862</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">BETTE</td>
+<td style="text-align: left;">NICHOLSON</td>
+<td style="text-align: right;">2.905042</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">GRACE</td>
+<td style="text-align: left;">MOSTEL</td>
+<td style="text-align: right;">7.260948</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">MATTHEW</td>
+<td style="text-align: left;">JOHANSSON</td>
+<td style="text-align: right;">3.336271</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">JOE</td>
+<td style="text-align: left;">SWANK</td>
+<td style="text-align: right;">4.341222</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">CHRISTIAN</td>
+<td style="text-align: left;">GABLE</td>
+<td style="text-align: right;">2.485816</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="exercise-8.2" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-8.2">Exercise 8.2</h2>
+<h2 class="anchored" data-anchor-id="exercise-8.2">Exercise 8.2<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:4439/#exercise-8.2" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
 <p>What are the names of the doctors with the 5 longest and 5 shortest average visits? Hint: use the <code>LIMIT</code> command.</p>
 </section>
 </section>
 <section id="longest" class="level1">
 <h1>5 longest</h1>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor.first_name, doctor.last_name, </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(julianday(visit.visit_end_date) <span class="op">-</span> julianday(visit.visit_start_date)) <span class="kw">AS</span> avg_visit_length</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> visit <span class="kw">ON</span> doctor.doctor_id <span class="op">=</span> visit.doctor_id</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> doctor.doctor_id</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> avg_visit_length <span class="kw">DESC</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb20-1"><a href="http://localhost:4439/#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor.first_name, doctor.last_name, </span>
+<span id="cb20-2"><a href="http://localhost:4439/#cb20-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(julianday(visit.visit_end_date) <span class="op">-</span> julianday(visit.visit_start_date)) <span class="kw">AS</span> avg_visit_length</span>
+<span id="cb20-3"><a href="http://localhost:4439/#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
+<span id="cb20-4"><a href="http://localhost:4439/#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> visit <span class="kw">ON</span> doctor.doctor_id <span class="op">=</span> visit.doctor_id</span>
+<span id="cb20-5"><a href="http://localhost:4439/#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> doctor.doctor_id</span>
+<span id="cb20-6"><a href="http://localhost:4439/#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> avg_visit_length <span class="kw">DESC</span></span>
+<span id="cb20-7"><a href="http://localhost:4439/#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>5 records</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">first_name</th>
+<th style="text-align: left;">last_name</th>
+<th style="text-align: right;">avg_visit_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BEN</td>
+<td style="text-align: left;">HARRIS</td>
+<td style="text-align: right;">7.652632</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TOM</td>
+<td style="text-align: left;">CRUISE</td>
+<td style="text-align: right;">7.637725</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NATALIE</td>
+<td style="text-align: left;">HOPKINS</td>
+<td style="text-align: right;">7.605042</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ELVIS</td>
+<td style="text-align: left;">MARX</td>
+<td style="text-align: right;">7.500183</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LIZA</td>
+<td style="text-align: left;">BERGMAN</td>
+<td style="text-align: right;">7.468742</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="shortest" class="level1">
 <h1>5 shortest</h1>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor.first_name, doctor.last_name, </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(julianday(visit.visit_end_date) <span class="op">-</span> julianday(visit.visit_start_date)) <span class="kw">AS</span> avg_visit_length</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> visit <span class="kw">ON</span> doctor.doctor_id <span class="op">=</span> visit.doctor_id</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> doctor.doctor_id</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> avg_visit_length <span class="kw">ASC</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb21-1"><a href="http://localhost:4439/#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> doctor.first_name, doctor.last_name, </span>
+<span id="cb21-2"><a href="http://localhost:4439/#cb21-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(julianday(visit.visit_end_date) <span class="op">-</span> julianday(visit.visit_start_date)) <span class="kw">AS</span> avg_visit_length</span>
+<span id="cb21-3"><a href="http://localhost:4439/#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> doctor</span>
+<span id="cb21-4"><a href="http://localhost:4439/#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> visit <span class="kw">ON</span> doctor.doctor_id <span class="op">=</span> visit.doctor_id</span>
+<span id="cb21-5"><a href="http://localhost:4439/#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> doctor.doctor_id</span>
+<span id="cb21-6"><a href="http://localhost:4439/#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> avg_visit_length <span class="kw">ASC</span></span>
+<span id="cb21-7"><a href="http://localhost:4439/#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>5 records</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">first_name</th>
+<th style="text-align: left;">last_name</th>
+<th style="text-align: right;">avg_visit_length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ELLEN</td>
+<td style="text-align: left;">PRESLEY</td>
+<td style="text-align: right;">2.213376</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DEBBIE</td>
+<td style="text-align: left;">AKROYD</td>
+<td style="text-align: right;">2.368833</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CHRISTIAN</td>
+<td style="text-align: left;">GABLE</td>
+<td style="text-align: right;">2.485816</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">VIVIEN</td>
+<td style="text-align: left;">BERGEN</td>
+<td style="text-align: right;">2.514360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RENEE</td>
+<td style="text-align: left;">BALL</td>
+<td style="text-align: right;">2.521940</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
 <section id="cleanup" class="level1">
 <h1>Cleanup</h1>
 <p>Run the following chunk to disconnect from the connection.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="http://localhost:4439/#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up</span></span>
+<span id="cb22-2"><a href="http://localhost:4439/#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 
@@ -735,12 +1729,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-</body></html>
+
 <script>
   window.backupDefine = window.define;
   window.define = undefined;
 </script>
-<script type="text/javascript" src="quarto-preview.js"></script>
+<script type="text/javascript" src="./lab9_files/quarto-preview.js.download"></script>
 <script>
   window.define = window.backupDefine;
   window.backupDefine = undefined;
@@ -755,3 +1749,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     });
   })
 </script>
+<div><div dir="ltr" class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"></div></div><i tabindex="0" role="none" data-tabster-dummy="" aria-hidden="true" style="position: fixed; height: 1px; width: 1px; opacity: 0.001; z-index: -1; content-visibility: hidden; top: 0px; left: 0px;"></i></body></html>
